@@ -22,10 +22,12 @@ Route::post('/store-images', 'HomeController@storeImages');
 
 Route::get('cache-image/{pathkey}/{filename}/{w?}/{h?}', function($pathkey, $filename, $w=100, $h=100){
 
+//    return \Illuminate\Support\Facades\Storage::get("$pathkey/$filename");
+
     $cacheimage = \Intervention\Image\Facades\Image::cache(function($image) use($pathkey, $filename, $w, $h){
 
         $filepath = "storage/$pathkey/$filename";
-        return $image->make($filepath)->fit(500, 500);
+        return $image->make($filepath)->fit(500, 320);
 
     },10); // cache for 10 minutes
 
